@@ -9,7 +9,7 @@ services:
       - backend
     volumes:
       - ${PROJECT_ROOT}/:/var/www/html/
-    container_name: php_pxsol
+    container_name: php_app
     ports:
       - "80:80"
   mysql:
@@ -26,7 +26,7 @@ services:
       MYSQL_DATABASE: "${DB_NAME}"
       MYSQL_USER: "${DB_USERNAME}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
-    container_name: mysql_pxsol
+    container_name: mysql_app
 networks:
   backend:
 volumes:
