@@ -10,8 +10,22 @@ services:
     volumes:
       - ${PROJECT_ROOT}/:/var/www/html/
     container_name: php_app
+  apache:
+    build:
+      context: './apache/'
+      args:
+        APACHE_VERSION: ${APACHE_VERSION}
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - frontend
+      - backend
     ports:
       - "80:80"
+    volumes:
+      - ${PROJECT_ROOT}/:/var/www/html/
+    container_name: apache_app
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
     restart: always
@@ -28,6 +42,7 @@ services:
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     container_name: mysql_app
 networks:
+  frontend:
   backend:
 volumes:
   data:
